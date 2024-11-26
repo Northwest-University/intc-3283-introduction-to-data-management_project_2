@@ -17,12 +17,23 @@
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Address1</th>
+                    <th>Address2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="row : ${LarrysInfo}">
                     <td th:text="${row.firstName}"></td>
+                    <td th:text="${row.lastName}"></td>
+                    <td th:text="${row.address1}"></td>
+                    <td th:text="${row.address2}"></td>
+                    <td th:text="${row.city}"></td>
+                    <td th:text="${row.state}"></td>
+                    <td th:text="${row.zip_code}"></td>
                 </tr>
                 </tbody>
             </table>
