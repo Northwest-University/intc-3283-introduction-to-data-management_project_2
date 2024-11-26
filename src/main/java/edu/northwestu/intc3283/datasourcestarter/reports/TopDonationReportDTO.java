@@ -1,20 +1,18 @@
 package edu.northwestu.intc3283.datasourcestarter.reports;
 
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+
 import java.math.BigDecimal;
 
 public class TopDonationReportDTO {
 
-    @Column("firstName")
-    private String firstName;
 
-    @Column("lastName")
+    private String firstName;
     private String lastName;
     private String email;
-    private int year;
-    private int month;
-
-    @Column("totalDonationAmount")
+    private int donationYear;
+    private int donationMonth;
     private BigDecimal totalDonationAmount;
 
     public String getFirstName() {
@@ -41,20 +39,20 @@ public class TopDonationReportDTO {
         this.email = email;
     }
 
-    public int getYear() {
-        return year;
+    public int getDonationYear() {
+        return donationYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDonationYear(int donationYear) {
+        this.donationYear = donationYear;
     }
 
-    public int getMonth() {
-        return month;
+    public int getDonationMonth() {
+        return donationMonth;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setDonationMonth(int donationMonth) {
+        this.donationMonth = donationMonth;
     }
 
     public BigDecimal getTotalDonationAmount() {

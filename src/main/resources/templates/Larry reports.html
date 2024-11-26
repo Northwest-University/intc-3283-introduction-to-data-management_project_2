@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INTC-3283 - Welcome</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>Donors With Missing Info</h1>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${LarrysInfo}">
+                    <td th:text="${row.firstName}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+    </div>
+    </div>
+</div>
+</body>
+</html>

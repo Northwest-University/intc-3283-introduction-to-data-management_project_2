@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INTC-3283 - Welcome</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <h1>Top Donors Report</h1>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Month Number</th>
+                    <th>Total Donated</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${donatedByMonth}">
+                    <td th:text="${row.donationMonth}"></td>
+                    <td th:text="${#numbers.formatDecimal(row.totalDonated, 0, 'COMMA', 2, 'POINT')}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped mt-4">
+                <thead>
+                <tr>
+                    <th>Week Number</th>
+                    <th>Total Donated</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${donatedByWeek}">
+                    <td th:text="${row.donationWeek}"></td>
+                    <td th:text="${#numbers.formatDecimal(row.totalDonated, 0, 'COMMA', 2, 'POINT')}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2 class="mt-5">First-Time Donors Report</h2>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Donors Name</th>
+                    <th>Donation Amount</th>
+                    <th>Mailing Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="donor : ${firstTimeDonors}">
+                    <td th:text="${donor.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(donor.amount, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${donor.mailingAddress}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

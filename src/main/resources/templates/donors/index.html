@@ -41,8 +41,8 @@
                 <!-- Initial server-side rendering of donors -->
                 <tr th:each="donor : ${donors}">
                     <td th:text="${donor.id}"></td>
-                    <td th:text="${donor.firstName}"></td>
-                    <td th:text="${donor.lastName}"></td>
+                    <td th:text="${donor.FirstName}"></td>
+                    <td th:text="${donor.LastName}"></td>
                     <td th:text="${donor.city}"></td>
                     <td th:text="${donor.state}"></td>
                     <td th:text="${donor.zipCode}"></td>
