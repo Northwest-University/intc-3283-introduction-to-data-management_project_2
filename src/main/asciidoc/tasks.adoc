@@ -1,0 +1,7 @@
+=== GET One Task (200 OK)
+include::{snippets}/tasks/get-one-200/curl-request.adoc[]
+include::{snippets}/tasks/get-one-200/http-response.adoc[]
+
+=== Get One Task (404 not found)
+include::{snippets}/tasks/get-one-404/curl-request.adoc[]
+include::{snippets}/tasks/get-one-404/http-response.adoc[]

@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableJdbcRepositories("edu.northwestu.intc3283.datasourcestarter.repository")
+@EnableJdbcRepositories("edu.northwestu.intc3283.datasourcestarter.*.repository")
 @EnableJdbcAuditing
 public class CustomJdbcConfiguration extends AbstractJdbcConfiguration {
 
