@@ -15,8 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.time.Instant;
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -57,6 +62,44 @@ class TasksApicontrollerTest {
     }
 
     @Test
+    public void createANewTask400BadRequestWhenTitleIsTooShort() throws Exception {
+        // HTTP POST to /tasks
+        // body will be a JSON payload shaped like a Task.
+        // We expect a 200 OK
+        Task taskRequest = new Task();
+        taskRequest.setTitle("one");
+        taskRequest.setDescription("description");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String taskRequestJson = objectMapper.writeValueAsString(taskRequest);
+
+        Task taskResponse = new Task();
+        taskResponse.setId(1L);
+        taskResponse.setTitle(taskRequest.getTitle());
+        taskResponse.setDescription(taskRequest.getDescription());
+        taskResponse.setStatus("PENDING");
+        taskResponse.setCreatedAt(Instant.now());
+
+        when(this.taskRepository.save(any(Task.class)))
+                .thenReturn(taskResponse);
+        ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.post("/tasks")
+                        .contentType("application/json")
+                        .content(taskRequestJson)
+                        .accept("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        resultActions.andDo(document("tasks/get-one-200",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())
+        ));
+
+    }
+
+
+
+
+
+    @Test
     public void getTaskProvides404NotFoundWhenRepositoryReturnsEmptyOptional() throws Exception {
         when(this.taskRepository.findById(1L)).thenReturn(Optional.empty());
         ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.get("/tasks/1")
@@ -69,6 +112,18 @@ class TasksApicontrollerTest {
         ));
 
     }
+
+   @Test
+    public void createANewTask() throws Exception {
+        Task taskRequest = new Task();
+        taskRequest.setTitle("title");
+        taskRequest.setDescription("description");
+
+       ObjectMapper objectMapper = new ObjectMapper();
+       String taskRequestJson = objectMapper.writeValueAsString(taskRequest);
+
+       when(this.taskRepository.findById(1L)).thenReturn(Optional.of(getTaskProvides404NotFoundWhenRepositoryReturnsEmptyOptional();));
+   }
 
 
 }
